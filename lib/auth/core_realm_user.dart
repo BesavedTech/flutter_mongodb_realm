@@ -65,4 +65,34 @@ class StitchUserProfile {
         birthday = map["birthday"] ?? '',
         minAge = map["minAge"] ?? '',
         maxAge = map["maxAge"] ?? '';
+  
+  
+  class UserProfile {
+  final String id;
+  final String userId;
+  final String userLevel;
+  final String phoneNumber;
+  final String dateAdded;
+  final String ggssPk;
+  final String fbmToken;
+  
+
+  UserProfile({
+    this.id,
+    this.userId,
+    this.userLevel,
+    this.phoneNumber,
+    this.dateAdded,
+    this.ggssPk,
+    this.fbmToken
+  });
+
+  UserProfile.fromMap(Map map)
+      : id = map["_id"] ?? '',
+        userId = map["userId"] ?? '',
+        userLevel = map["userLevel"] ?? '',
+        phoneNumber = map["phoneNumber"] ?? '',
+        dateAdded = map["dateAdded"] ?? '',
+        ggssPk = map["ggssPk"] ?? '',
+        fbmToken = map["fbmToken"] ?? ''  
 }
