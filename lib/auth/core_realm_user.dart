@@ -5,11 +5,13 @@ class CoreRealmUser {
   final String id;
   final String deviceId;
   final StitchUserProfile profile;
+  final Map cutomData;
 
   CoreRealmUser({
     @required this.id,
     this.deviceId,
     this.profile,
+    this.customData,
   });
 
 //  final String loggedInProviderType;
@@ -24,7 +26,9 @@ class CoreRealmUser {
         : CoreRealmUser(
             id: map["id"],
             deviceId: map["device_id"],
+            customData: map['customData'] ?? Map()));
             profile: StitchUserProfile.fromMap(map['profile'] ?? Map()));
+    
   }
 }
 
