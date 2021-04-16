@@ -243,6 +243,18 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
             }
         })
     }
+    
+     private fun getCustomData(@NonNull result: Result) {
+
+        try {
+            val user = client.getCustomData()
+            result.success(user?.toMap())
+        }
+        catch (e: AppException){
+            result.error("ERROR", "Cannot get user", "")
+        }
+    }
+
 
     private fun getUserId(@NonNull result: Result) {
         try {
