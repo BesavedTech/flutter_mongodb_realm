@@ -73,6 +73,10 @@ class MyMongoStitchClient(
     fun getUserId(): String?{
         return app.currentUser()?.id
     }
+        
+         fun getUserCustomData(): Document?{
+        return app.currentUser()?.customData
+    }
 
     fun isUserLoggedIn(): Boolean{
         return app.currentUser()?.isLoggedIn ?: false
