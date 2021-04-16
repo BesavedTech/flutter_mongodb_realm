@@ -56,7 +56,7 @@ fun User.toMap(): Map<String, Any> {
     return mapOf(
             "id" to id,
             "device_id" to deviceId,
-            "custom_data" to customData,
+            "customData" to customData,
             "profile" to mapOf(
                     "name" to profile?.name,
                     "email" to profile?.email,
