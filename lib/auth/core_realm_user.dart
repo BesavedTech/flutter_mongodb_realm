@@ -5,7 +5,7 @@ class CoreRealmUser {
   final String id;
   final String deviceId;
   final StitchUserProfile profile;
-  Map cutomData;
+  Map customData;
 
   CoreRealmUser({
     @required this.id,
