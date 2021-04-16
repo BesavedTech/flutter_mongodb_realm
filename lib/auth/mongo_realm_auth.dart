@@ -98,6 +98,11 @@ class MongoRealmAuth {
     var result = await FlutterMongoRealm.getUserId();
     return result;
   }
+  
+  Future<Map<dynamic,dynamic>> getUserCustomData() async {
+    var result = await FlutterMongoRealm.getUserCustomData();
+    return result;
+  }
 
   Future<bool> registerWithEmail(
       {@required String email, @required String password}) async {
