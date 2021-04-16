@@ -104,6 +104,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
             "registerWithEmail" -> registerWithEmail(call, result)
             "logout" -> logout(result)
             "getUserId" -> getUserId(result)
+            "getUserCustomData" -> getUserCustomData(result)
             "getUser" -> getUser(result)
             "sendResetPasswordEmail" -> sendResetPasswordEmail(call, result)
 
@@ -244,10 +245,10 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
         })
     }
     
-     private fun getCustomData(@NonNull result: Result) {
+     private fun getUserCustomData(@NonNull result: Result) {
 
         try {
-            val user = client.getCustomData()
+            val user = client.getUserCustomData()
             result.success(user?.toMap())
         }
         catch (e: AppException){
