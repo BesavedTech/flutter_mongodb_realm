@@ -66,7 +66,9 @@ class StitchUserProfile {
         minAge = map["minAge"] ?? '',
         maxAge = map["maxAge"] ?? '';
   
-  
+}
+
+
   class UserProfile {
   final String id;
   final String userId;
@@ -84,7 +86,7 @@ class StitchUserProfile {
     this.phoneNumber,
     this.dateAdded,
     this.ggssPk,
-    this.fbmToken
+    this.fbmToken,
   });
 
   UserProfile.fromMap(Map map)
@@ -94,5 +96,5 @@ class StitchUserProfile {
         phoneNumber = map["phoneNumber"] ?? '',
         dateAdded = map["dateAdded"] ?? '',
         ggssPk = map["ggssPk"] ?? '',
-        fbmToken = map["fbmToken"] ?? ''  
+        fbmToken = map["fbmToken"] ?? '';
 }
