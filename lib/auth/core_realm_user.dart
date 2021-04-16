@@ -26,8 +26,9 @@ class CoreRealmUser {
         : CoreRealmUser(
             id: map["id"],
             deviceId: map["device_id"],
-            customData: UserProfile.fromMap(map['customData'] ?? Map())),
-            profile: StitchUserProfile.fromMap(map['profile'] ?? Map()));
+            customData: UserProfile.fromMap(map['customData'] ?? Map()),
+            profile: StitchUserProfile.fromMap(map['profile'] ?? Map())
+        );
     
   }
 }
