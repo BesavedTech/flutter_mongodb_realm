@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'stitch_credential.dart';
 
 @deprecated
@@ -8,7 +6,7 @@ class UserPasswordCredential extends StitchCredential {
   final String password;
 
   UserPasswordCredential({
-    @required this.username,
-    @required this.password,
+    required this.username,
+    required this.password,
   });
 }

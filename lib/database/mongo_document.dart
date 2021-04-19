@@ -8,7 +8,7 @@ import 'package:bson/bson.dart';
 class MongoDocument {
   final Map<String, dynamic> _map = LinkedHashMap<String, dynamic>();
 
-  Map<String, Object> get map => _map;
+  Map<String, Object?> get map => _map;
 
   /// Create a Document instance initialized with the given key/value pair.
   MongoDocument.single(String key, dynamic value) {
@@ -18,7 +18,7 @@ class MongoDocument {
   /// Creates a Document instance initialized with the given map.
   /// or an empty Document instance if not provided.
   MongoDocument(Map<String, dynamic> map) {
-    if (map != null) {
+    if (map.length > 0) {
       _map.addAll(map);
     }
   }

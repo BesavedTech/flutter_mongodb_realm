@@ -1,14 +1,12 @@
-import 'package:flutter/foundation.dart';
-
 /// A user that belongs to a MongoDB Stitch application.
 class CoreRealmUser {
-  final String id;
-  final String deviceId;
-  final StitchUserProfile profile;
-  Map<String,dynamic> customData;
+  final String? id;
+  final String? deviceId;
+  final StitchUserProfile? profile;
+  Map<String, dynamic>? customData;
 
   CoreRealmUser({
-    @required this.id,
+    required this.id,
     this.deviceId,
     this.profile,
     this.customData,
@@ -20,30 +18,28 @@ class CoreRealmUser {
 //  final bool isLoggedIn;
 //  final DateTime lastAuthActivity;
 
-  static fromMap(Map map) {
+  static fromMap(Map? map) {
     return (map == null)
         ? null
         : CoreRealmUser(
             id: map["id"],
             deviceId: map["device_id"],
-          customData: map["customData"],
+            customData: map["customData"],
 //             customData: UserProfile.fromMap(map['customData'] ?? Map()),
-            profile: StitchUserProfile.fromMap(map['profile'] ?? Map())
-        );
-    
+            profile: StitchUserProfile.fromMap(map['profile'] ?? Map()));
   }
 }
 
 class StitchUserProfile {
-  final String name;
-  final String email;
-  final String pictureUrl;
-  final String firstName;
-  final String lastName;
-  final String gender;
-  final String birthday;
-  final String minAge;
-  final String maxAge;
+  final String? name;
+  final String? email;
+  final String? pictureUrl;
+  final String? firstName;
+  final String? lastName;
+  final String? gender;
+  final String? birthday;
+  final String? minAge;
+  final String? maxAge;
 
   StitchUserProfile({
     this.name,
@@ -67,19 +63,16 @@ class StitchUserProfile {
         birthday = map["birthday"] ?? '',
         minAge = map["minAge"] ?? '',
         maxAge = map["maxAge"] ?? '';
-  
 }
 
-
-  class UserProfile {
-  final String id;
-  final String userId;
-  final String userLevel;
-  final String phoneNumber;
-  final String dateAdded;
-  final String ggssPk;
-  final String fbmToken;
-  
+class UserProfile {
+  final String? id;
+  final String? userId;
+  final String? userLevel;
+  final String? phoneNumber;
+  final String? dateAdded;
+  final String? ggssPk;
+  final String? fbmToken;
 
   UserProfile({
     this.id,

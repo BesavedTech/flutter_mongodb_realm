@@ -1,8 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 //import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:flutter_mongodb_realm_besaved/auth/credentials/google_credential.dart';
 import 'package:flutter_mongodb_realm_besaved/database/mongo_document.dart';
@@ -30,7 +27,8 @@ class MongoRealmAuth {
   /// Logs in as a user with the given credentials associated with an
   /// authentication provider.
   @deprecated
-  Future<CoreRealmUser> loginWithCredential(StitchCredential credential) async {
+  Future<CoreRealmUser?> loginWithCredential(
+      StitchCredential credential) async {
     var result;
 
     if (credential is AnonymousCredential) {
@@ -55,9 +53,9 @@ class MongoRealmAuth {
       );
 
       try {
-        var authCode =
-            await _googleLoginWrapper.handleSignInAndGetAuthServerCode();
-        print(authCode ?? 'nothing');
+        var authCode = await (_googleLoginWrapper
+            .handleSignInAndGetAuthServerCode() as FutureOr<String>);
+        print(authCode);
         result = await FlutterMongoRealm.signInWithGoogle(authCode);
       } on Exception catch (e) {
         print(e);
@@ -80,10 +78,11 @@ class MongoRealmAuth {
     return result;
   }
 
-  Future<bool> logout() async {
+  Future<bool?> logout() async {
     var result = await FlutterMongoRealm.logout();
 
-    bool loggedWithGoogle = await _googleLoginWrapper.isLogged;
+    bool loggedWithGoogle =
+        await (_googleLoginWrapper.isLogged as FutureOr<bool>);
 //    bool loggedWithFacebook = await _facebookLoginWrapper.isLogged;
 //
     if (loggedWithGoogle) await _googleLoginWrapper.handleSignOut();
@@ -94,28 +93,28 @@ class MongoRealmAuth {
     return result;
   }
 
-  Future<String> getUserId() async {
+  Future<String?> getUserId() async {
     var result = await FlutterMongoRealm.getUserId();
     return result;
   }
 
-  Future<Map<dynamic, dynamic>> getUserCustomData() async {
+  Future<Map<dynamic, dynamic>?> getUserCustomData() async {
     var result = await FlutterMongoRealm.getUserCustomData();
     return result;
   }
 
-  Future<bool> registerWithEmail(
-      {@required String email, @required String password}) async {
+  Future<bool?> registerWithEmail(
+      {required String email, required String password}) async {
     var result = await FlutterMongoRealm.registerWithEmail(email, password);
     return result;
   }
 
-  Future<bool> sendResetPasswordEmail(String email) async {
+  Future<bool?> sendResetPasswordEmail(String email) async {
     var result = await FlutterMongoRealm.sendResetPasswordEmail(email);
     return result;
   }
 
-  Future<CoreRealmUser> get user async => await FlutterMongoRealm.getUser();
+  Future<CoreRealmUser?> get user async => await FlutterMongoRealm.getUser();
 
   Stream authListener() {
     var stream = FlutterMongoRealm.authListener();
@@ -126,22 +125,22 @@ class MongoRealmAuth {
 /// ////////////////////////////////////////////////////////////////
 
 class _GoogleLoginWrapper {
-  GoogleSignIn _googleSignIn;
+  GoogleSignIn? _googleSignIn;
 
-  Future<bool> get isLogged =>
-      _googleSignIn == null ? Future.value(false) : _googleSignIn.isSignedIn();
+  Future<bool?> get isLogged =>
+      _googleSignIn == null ? Future.value(false) : _googleSignIn!.isSignedIn();
 
-  init({@required String serverClientId, List<String> scopes}) {
+  init({required String serverClientId, List<String>? scopes}) {
     _googleSignIn =
         GoogleSignIn(serverClientId: serverClientId, scopes: scopes);
   }
 
-  Future<String> handleSignInAndGetAuthServerCode() async {
+  Future<String?> handleSignInAndGetAuthServerCode() async {
     assert(_googleSignIn != null);
 
-    String code;
+    String? code;
     // try {
-    var account = await _googleSignIn.signIn();
+    var account = await _googleSignIn!.signIn();
 
     if (account != null) code = account.serverAuthCode;
     // } on Exception catch (error) {
@@ -151,5 +150,5 @@ class _GoogleLoginWrapper {
     return code;
   }
 
-  Future<void> handleSignOut() => _googleSignIn.disconnect();
+  Future<void> handleSignOut() => _googleSignIn!.disconnect();
 }
