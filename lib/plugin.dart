@@ -1,11 +1,7 @@
 import 'dart:async';
-import 'dart:convert';
 
-import 'package:bson/bson.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_mongo_stitch_platform_interface_besaved/flutter_mongo_stitch_platform_interface_besaved.dart';
 import 'package:flutter_mongodb_realm_besaved/stream_interop/stream_interop.dart';
-import 'package:universal_html/html.dart';
 
 import 'auth/core_realm_user.dart';
 
@@ -240,34 +236,9 @@ class FlutterMongoRealm {
   static Stream authListener() {
     Stream nativeStream;
 
-    if (kIsWeb) {
-      //Stream<Event> jsStream = document.on["authChange"];
-      var jsStream = StreamInterop.getNativeStream("authChange");
-
-      // ignore: close_sinks
-      var controller = StreamController<Map?>();
-
-      controller.onListen = () {
-        controller.add(null);
-      };
-
-      // migrating events from the js-event to a dart event
-      jsStream.listen((event) {
-        var eventDetail = event.detail;
-        print(eventDetail);
-        if (eventDetail == null) {
-          controller.add(null);
-        } else {
-          controller.add(eventDetail);
-        }
-      });
-
-      nativeStream = controller.stream;
-    } else {
-      nativeStream = StreamInterop.getNativeStream({
-        "handler": "auth",
-      });
-    }
+    nativeStream = StreamInterop.getNativeStream({
+      "handler": "auth",
+    });
 
     return nativeStream;
 
