@@ -3,7 +3,7 @@ class CoreRealmUser {
   final String? id;
   final String? deviceId;
   final StitchUserProfile? profile;
-  Map<String, dynamic>? customData;
+  final UserProfile? customData;
 
   CoreRealmUser({
     required this.id,
@@ -24,8 +24,7 @@ class CoreRealmUser {
         : CoreRealmUser(
             id: map["id"],
             deviceId: map["device_id"],
-            customData: map["customData"],
-//             customData: UserProfile.fromMap(map['customData'] ?? Map()),
+            customData: UserProfile.fromMap(map['customData'] ?? Map()),
             profile: StitchUserProfile.fromMap(map['profile'] ?? Map()));
   }
 }
@@ -71,7 +70,6 @@ class UserProfile {
   final String? userLevel;
   final String? phoneNumber;
   final String? dateAdded;
-  final String? ggssPk;
   final String? fbmToken;
 
   UserProfile({
@@ -80,7 +78,6 @@ class UserProfile {
     this.userLevel,
     this.phoneNumber,
     this.dateAdded,
-    this.ggssPk,
     this.fbmToken,
   });
 
@@ -90,6 +87,5 @@ class UserProfile {
         userLevel = map["userLevel"] ?? '',
         phoneNumber = map["phoneNumber"] ?? '',
         dateAdded = map["dateAdded"] ?? '',
-        ggssPk = map["ggssPk"] ?? '',
         fbmToken = map["fbmToken"] ?? '';
 }
