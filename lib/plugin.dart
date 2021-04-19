@@ -195,40 +195,14 @@ class FlutterMongoRealm {
     bool asObjectIds = true,
   }) {
     Stream nativeStream;
-
-    if (kIsWeb) {
-//      Stream<Event> jsStream =
-//          document.on["watchEvent.$databaseName.$collectionName"];
-
-      var jsStream = StreamInterop.getNativeStream(
-          "watchEvent.$databaseName.$collectionName");
-
-      // ignore: close_sinks
-      var controller = StreamController<String>();
-
-      // migrating events from the js-event to a dart event
-      jsStream.listen((event) {
-        var eventDetail = (event as CustomEvent).detail;
-
-        var map = json.decode(eventDetail ?? "{}");
-
-        if (map['_id'] is String == false) {
-          map['_id'] = ObjectId.parse(map['_id']);
-        }
-        controller.add(jsonEncode(map));
-      });
-
-      nativeStream = controller.stream;
-    } else {
-      nativeStream = StreamInterop.getNativeStream({
-        "handler": "watchCollection",
-        "db": databaseName,
-        "collection": collectionName,
-        "filter": filter,
-        "ids": ids,
-        "as_object_ids": asObjectIds,
-      });
-    }
+    nativeStream = StreamInterop.getNativeStream({
+      "handler": "watchCollection",
+      "db": databaseName,
+      "collection": collectionName,
+      "filter": filter,
+      "ids": ids,
+      "as_object_ids": asObjectIds,
+    });
 
     return nativeStream;
 
@@ -279,7 +253,7 @@ class FlutterMongoRealm {
 
       // migrating events from the js-event to a dart event
       jsStream.listen((event) {
-        var eventDetail = (event as CustomEvent).detail;
+        var eventDetail = event.detail;
         print(eventDetail);
         if (eventDetail == null) {
           controller.add(null);
