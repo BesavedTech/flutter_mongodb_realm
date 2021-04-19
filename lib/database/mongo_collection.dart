@@ -35,8 +35,7 @@ class MongoCollection {
   /// The namespace of this collection, i.e. the database and collection names together.
   String get namespace => "$collectionName.$databaseName";
 
-  MongoCollection(
-      {@required this.collectionName, @required this.databaseName}) {
+  MongoCollection({required this.collectionName, required this.databaseName}) {
 //    if(kIsWeb){
 //      FlutterMongoRealm.setupWatchCollection(collectionName, databaseName);//, filter: BsonDocument(fixFilter).toJson());
 //    }
@@ -54,11 +53,11 @@ class MongoCollection {
 
   /// Inserts one or more documents to the collection
   Future<Map<int, ObjectId>> insertMany(List<MongoDocument> documents) async {
-    Map results = await FlutterMongoRealm.insertDocuments(
+    Map results = await (FlutterMongoRealm.insertDocuments(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       list: documents.map((doc) => jsonEncode(doc.map)).toList(),
-    );
+    ));
 
     return results.map<int, ObjectId>(
         (key, value) => MapEntry<int, ObjectId>(key, ObjectId.parse(value)));
@@ -66,7 +65,7 @@ class MongoCollection {
 
   /// Removes at most one document from the collection that matches the given
   /// filter. If no documents match, the collection is not modified.
-  Future<int> deleteOne([filter]) async {
+  Future<int?> deleteOne([filter]) async {
     // force sending an empty filter instead asserting
     if (filter == null) {
       filter = Map<String, dynamic>();
@@ -75,7 +74,7 @@ class MongoCollection {
 
       if (filter is Map<String, dynamic>) {
         // convert 'QuerySelector' into map, too
-        filter?.forEach((key, value) {
+        filter.forEach((dynamic key, value) {
           if (value is QueryOperator) {
             filter[key] = value.values;
           }
@@ -97,7 +96,7 @@ class MongoCollection {
 
   /// Removes all documents from the collection that matches the given
   /// filter. If no documents match, the collection is not modified.
-  Future<int> deleteMany([filter]) async {
+  Future<int?> deleteMany([filter]) async {
     // force sending an empty filter instead asserting
     if (filter == null) {
       filter = Map<String, dynamic>();
@@ -106,7 +105,7 @@ class MongoCollection {
 
       if (filter is Map<String, dynamic>) {
         // convert 'QuerySelector' into map, too
-        filter?.forEach((key, value) {
+        filter.forEach((dynamic key, value) {
           if (value is QueryOperator) {
             filter[key] = value.values;
           }
@@ -127,14 +126,14 @@ class MongoCollection {
   }
 
   ///Finds all documents in the collection according to the given filter
-  Future<List<MongoDocument>> find({filter, RemoteFindOptions options}) async {
+  Future<List<MongoDocument>> find({filter, RemoteFindOptions? options}) async {
     var filterCopy = <String, dynamic>{};
     if (filter != null) {
       assert(filter is Map<String, dynamic> || filter is LogicalQueryOperator);
 
       if (filter is Map<String, dynamic>) {
         // convert 'QuerySelector' into map, too
-        filter?.forEach((key, value) {
+        filter.forEach((key, value) {
           if (value is QueryOperator) {
             filterCopy[key] = value.values;
           } else
@@ -150,14 +149,14 @@ class MongoCollection {
     var projectionMap =
         options?.projection?.map((k, v) => MapEntry(k, v.value));
 
-    List<dynamic> resultJson = await FlutterMongoRealm.findDocuments(
+    List<dynamic>? resultJson = await (FlutterMongoRealm.findDocuments(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       filter: BsonDocument(filterCopy).toJson(),
       projection: projectionMap == null ? null : jsonEncode(projectionMap),
       limit: options?.limit ?? 0,
       sort: sortMap == null ? null : jsonEncode(sortMap),
-    );
+    ));
 
     if (resultJson == null) {
       return [];
@@ -171,15 +170,15 @@ class MongoCollection {
   }
 
   /// Finds a document in the collection according to the given filter
-  Future<MongoDocument> findOne(
-      {filter, Map<String, ProjectionValue> projection}) async {
+  Future<MongoDocument?> findOne(
+      {filter, Map<String, ProjectionValue>? projection}) async {
     var filterCopy = <String, dynamic>{};
     if (filter != null) {
       assert(filter is Map<String, dynamic> || filter is LogicalQueryOperator);
 
       if (filter is Map<String, dynamic>) {
         // convert 'QuerySelector' into map, too
-        filter?.forEach((key, value) {
+        filter.forEach((key, value) {
           if (value is QueryOperator) {
             filterCopy[key] = value.values;
           } else
@@ -193,12 +192,12 @@ class MongoCollection {
 
     var projectionMap = projection?.map((k, v) => MapEntry(k, v.value));
 
-    String resultJson = await FlutterMongoRealm.findFirstDocument(
+    String? resultJson = await (FlutterMongoRealm.findFirstDocument(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       filter: BsonDocument(filterCopy).toJson(),
       projection: projectionMap == null ? null : jsonEncode(projectionMap),
-    );
+    ));
 
     // return null document for empty query
     if (resultJson == null) {
@@ -210,13 +209,13 @@ class MongoCollection {
 
   /// Counts the number of all documents in the collection.
   /// unless according to the given filter
-  Future<int> count([filter]) async {
+  Future<int?> count([filter]) async {
     if (filter != null) {
       assert(filter is Map<String, dynamic> || filter is LogicalQueryOperator);
 
       if (filter is Map<String, dynamic>) {
         // convert 'QuerySelector' into map, too
-        filter?.forEach((key, value) {
+        filter.forEach((dynamic key, value) {
           if (value is QueryOperator) {
             filter[key] = value.values;
           }
@@ -227,24 +226,24 @@ class MongoCollection {
       }
     }
 
-    int size = await FlutterMongoRealm.countDocuments(
+    int? size = await (FlutterMongoRealm.countDocuments(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       filter: BsonDocument(filter).toJson(),
-    );
+    ));
 
     return size;
   }
 
   /// Update a single document in the collection according to the
   /// specified arguments.
-  Future<List> updateOne(
-      {@required filter, @required UpdateOperator update}) async {
+  Future<List?> updateOne(
+      {required filter, required UpdateOperator update}) async {
     assert(filter is Map<String, dynamic> || filter is LogicalQueryOperator);
 
     if (filter is Map<String, dynamic>) {
       // convert 'QuerySelector' into map, too
-      filter?.forEach((key, value) {
+      filter.forEach((dynamic key, value) {
         if (value is QueryOperator) {
           filter[key] = value.values;
         }
@@ -272,25 +271,25 @@ class MongoCollection {
       return MapEntry<String, dynamic>(key, value);
     });
 
-    List results = await FlutterMongoRealm.updateDocument(
+    List? results = await (FlutterMongoRealm.updateDocument(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       filter: BsonDocument(filter).toJson(),
       update: BsonDocument(updateValues).toJson(),
-    );
+    ));
 
     return results;
   }
 
   /// Update all documents in the collection according to the
   /// specified arguments.
-  Future<List> updateMany(
-      {@required filter, @required UpdateOperator update}) async {
+  Future<List?> updateMany(
+      {required filter, required UpdateOperator update}) async {
     assert(filter is Map<String, dynamic> || filter is LogicalQueryOperator);
 
     if (filter is Map<String, dynamic>) {
       // convert 'QuerySelector' into map, too
-      filter?.forEach((key, value) {
+      filter.forEach((dynamic key, value) {
         if (value is QueryOperator) {
           filter[key] = value.values;
         }
@@ -300,12 +299,12 @@ class MongoCollection {
       filter = filter.values;
     }
 
-    List results = await FlutterMongoRealm.updateDocuments(
+    List? results = await (FlutterMongoRealm.updateDocuments(
       collectionName: this.collectionName,
       databaseName: this.databaseName,
       filter: BsonDocument(filter).toJson(),
       update: BsonDocument(update.values).toJson(),
-    );
+    ));
 
     return results;
   }
@@ -314,7 +313,7 @@ class MongoCollection {
   /// on this collection that the active user is authorized to see based on the
   /// configured MongoDB rules.
   /// can optionally watch only specifies documents with the provided ids
-  Stream watch({List<String> ids, bool asObjectIds = true}) {
+  Stream watch({List<String>? ids, bool asObjectIds = true}) {
     var stream;
     if (kIsWeb) {
       FlutterMongoRealm.setupWatchCollection(collectionName, databaseName,
@@ -339,7 +338,6 @@ class MongoCollection {
   /// Watches a collection. The provided BSON document will be used as a match
   /// expression filter on the change events coming from the stream.
   Stream watchWithFilter(Map<String, dynamic> filter) {
-    assert(filter != null);
     // convert 'QuerySelector' into map, too
     filter.forEach((key, value) {
       if (value is QueryOperator) {
@@ -383,9 +381,9 @@ class MongoCollection {
 }
 
 class RemoteFindOptions {
-  final int limit;
-  final Map<String, ProjectionValue> projection;
-  final Map<String, OrderValue> sort;
+  final int? limit;
+  final Map<String, ProjectionValue>? projection;
+  final Map<String, OrderValue>? sort;
 
   RemoteFindOptions({this.limit, this.projection, this.sort});
 }

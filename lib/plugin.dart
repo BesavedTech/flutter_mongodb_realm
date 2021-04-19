@@ -5,7 +5,6 @@ import 'package:bson/bson.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_mongo_stitch_platform_interface_besaved/flutter_mongo_stitch_platform_interface_besaved.dart';
 import 'package:flutter_mongodb_realm_besaved/stream_interop/stream_interop.dart';
-import 'package:meta/meta.dart';
 import 'package:universal_html/html.dart';
 
 import 'auth/core_realm_user.dart';
@@ -20,32 +19,32 @@ class FlutterMongoRealm {
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<CoreRealmUser> signInWithUsernamePassword(
+  static Future<CoreRealmUser?> signInWithUsernamePassword(
       String username, String password) async {
     var details = await FlutterMongoStitchPlatform.instance
         .signInWithUsernamePassword(username, password);
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<CoreRealmUser> signInWithGoogle(String authCode) async {
+  static Future<CoreRealmUser?> signInWithGoogle(String authCode) async {
     var details =
         await FlutterMongoStitchPlatform.instance.signInWithGoogle(authCode);
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<CoreRealmUser> signInWithFacebook(String accessToken) async {
+  static Future<CoreRealmUser?> signInWithFacebook(String accessToken) async {
     var details = await FlutterMongoStitchPlatform.instance
         .signInWithFacebook(accessToken);
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<CoreRealmUser> signInWithCustomJwt(String token) async {
+  static Future<CoreRealmUser?> signInWithCustomJwt(String token) async {
     var details =
         await FlutterMongoStitchPlatform.instance.signInWithCustomJwt(token);
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<CoreRealmUser> signInWithCustomFunction(String json) async {
+  static Future<CoreRealmUser?> signInWithCustomFunction(String json) async {
     var details = await FlutterMongoStitchPlatform.instance
         .signInWithCustomFunction(json);
     return CoreRealmUser.fromMap(details);
@@ -63,17 +62,17 @@ class FlutterMongoRealm {
     return await FlutterMongoStitchPlatform.instance.getUserCustomData();
   }
 
-  static Future<bool> registerWithEmail(String email, String password) async {
+  static Future<bool?> registerWithEmail(String email, String password) async {
     return await FlutterMongoStitchPlatform.instance
         .registerWithEmail(email, password);
   }
 
-  static Future<CoreRealmUser> getUser() async {
+  static Future<CoreRealmUser?> getUser() async {
     var details = await FlutterMongoStitchPlatform.instance.getUser();
     return CoreRealmUser.fromMap(details);
   }
 
-  static Future<bool> sendResetPasswordEmail(String email) async {
+  static Future<bool?> sendResetPasswordEmail(String email) async {
     return await FlutterMongoStitchPlatform.instance
         .sendResetPasswordEmail(email);
   }
@@ -81,21 +80,21 @@ class FlutterMongoRealm {
   ///
 
   static Future insertDocument({
-    @required String collectionName,
-    @required String databaseName,
-    @required Map<String, Object> data,
+    required String collectionName,
+    required String databaseName,
+    required Map<String, Object?> data,
   }) async {
     return await FlutterMongoStitchPlatform.instance.insertDocument(
       collectionName: collectionName,
       databaseName: databaseName,
-      data: data,
+      data: data as Map<String, Object>,
     );
   }
 
   static Future insertDocuments({
-    @required String collectionName,
-    @required String databaseName,
-    @required List<String> list,
+    required String collectionName,
+    required String databaseName,
+    required List<String> list,
   }) async {
     return await FlutterMongoStitchPlatform.instance.insertDocuments(
       collectionName: collectionName,
@@ -105,12 +104,12 @@ class FlutterMongoRealm {
   }
 
   static Future findDocuments(
-      {String collectionName,
-      String databaseName,
+      {String? collectionName,
+      String? databaseName,
       dynamic filter,
-      String projection,
-      int limit,
-      String sort}) async {
+      String? projection,
+      int? limit,
+      String? sort}) async {
     return await FlutterMongoStitchPlatform.instance.findDocuments(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -122,10 +121,10 @@ class FlutterMongoRealm {
   }
 
   static Future findFirstDocument(
-      {String collectionName,
-      String databaseName,
+      {String? collectionName,
+      String? databaseName,
       dynamic filter,
-      String projection}) async {
+      String? projection}) async {
     return await FlutterMongoStitchPlatform.instance.findFirstDocument(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -135,7 +134,7 @@ class FlutterMongoRealm {
   }
 
   static Future deleteDocument(
-      {String collectionName, String databaseName, dynamic filter}) async {
+      {String? collectionName, String? databaseName, dynamic filter}) async {
     return await FlutterMongoStitchPlatform.instance.deleteDocument(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -144,7 +143,7 @@ class FlutterMongoRealm {
   }
 
   static Future deleteDocuments(
-      {String collectionName, String databaseName, dynamic filter}) async {
+      {String? collectionName, String? databaseName, dynamic filter}) async {
     return await FlutterMongoStitchPlatform.instance.deleteDocuments(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -153,7 +152,7 @@ class FlutterMongoRealm {
   }
 
   static Future countDocuments(
-      {String collectionName, String databaseName, dynamic filter}) async {
+      {String? collectionName, String? databaseName, dynamic filter}) async {
     return await FlutterMongoStitchPlatform.instance.countDocuments(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -163,10 +162,10 @@ class FlutterMongoRealm {
 
   ///
   static Future updateDocument(
-      {String collectionName,
-      String databaseName,
-      String filter,
-      String update}) async {
+      {String? collectionName,
+      String? databaseName,
+      String? filter,
+      String? update}) async {
     return await FlutterMongoStitchPlatform.instance.updateDocument(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -176,10 +175,10 @@ class FlutterMongoRealm {
   }
 
   static Future updateDocuments(
-      {String collectionName,
-      String databaseName,
-      String filter,
-      String update}) async {
+      {String? collectionName,
+      String? databaseName,
+      String? filter,
+      String? update}) async {
     return await FlutterMongoStitchPlatform.instance.updateDocuments(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -189,10 +188,10 @@ class FlutterMongoRealm {
   }
 
   static Stream watchCollection({
-    @required String collectionName,
-    @required String databaseName,
-    List<String> ids,
-    String filter,
+    required String collectionName,
+    required String databaseName,
+    List<String>? ids,
+    String? filter,
     bool asObjectIds = true,
   }) {
     Stream nativeStream;
@@ -245,9 +244,9 @@ class FlutterMongoRealm {
   }
 
   static aggregate(
-      {@required String collectionName,
-      @required String databaseName,
-      List<String> pipeline}) async {
+      {required String collectionName,
+      required String databaseName,
+      List<String>? pipeline}) async {
     return await FlutterMongoStitchPlatform.instance.aggregate(
       collectionName: collectionName,
       databaseName: databaseName,
@@ -256,7 +255,7 @@ class FlutterMongoRealm {
   }
 
   static Future callFunction(String name,
-      {List args, int requestTimeout}) async {
+      {List? args, int? requestTimeout}) async {
     return await FlutterMongoStitchPlatform.instance.callFunction(
       name,
       args: args,
@@ -272,7 +271,7 @@ class FlutterMongoRealm {
       var jsStream = StreamInterop.getNativeStream("authChange");
 
       // ignore: close_sinks
-      var controller = StreamController<Map>();
+      var controller = StreamController<Map?>();
 
       controller.onListen = () {
         controller.add(null);
@@ -306,7 +305,7 @@ class FlutterMongoRealm {
   // WEB-specific helpers
 
   static Future setupWatchCollection(String collectionName, String databaseName,
-      {List<String> ids, bool asObjectIds, String filter}) async {
+      {List<String>? ids, bool? asObjectIds, String? filter}) async {
     await FlutterMongoStitchPlatform.instance.setupWatchCollection(
       collectionName,
       databaseName,

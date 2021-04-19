@@ -9,9 +9,9 @@ extension ObjectIdExtentions on ObjectId {
 
 // TODO: maybe using 'BsonObject' instead 'dynamic'
 class BsonDocument {
-  final Map<String, dynamic> _map;
+  final Map<String, dynamic>? _map;
 
-  Map<String, dynamic> get map => _map;
+  Map<String, dynamic>? get map => _map;
 
   /// Creates a document instance initialized with the given map.
   /// or an empty Document instance if not provided.
@@ -23,7 +23,7 @@ class BsonDocument {
     }
 
     var __map = <String, dynamic>{};
-    for (var entry in _map.entries) {
+    for (var entry in _map!.entries) {
       if (entry.value is ObjectId)
         __map[entry.key] = (entry.value as ObjectId).toJsonOid();
       else if (entry.value is Map) {
@@ -41,7 +41,8 @@ class BsonDocument {
               }
               if (entry3.value is List) {
                 final list = (entry3.value as List);
-                __map[entry.key][entry2.key][entry3.key] = List(list.length);
+                __map[entry.key][entry2.key][entry3.key] =
+                    List.filled(list.length, null, growable: false);
                 for (int index = 0; index < list.length; index++) {
                   if (list[index] is ObjectId) {
                     __map[entry.key][entry2.key][entry3.key][index] =
