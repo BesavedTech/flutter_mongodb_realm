@@ -1,4 +1,4 @@
-import 'package:flutter_mongodb_realm/database/mongo_document.dart';
+import 'package:flutter_mongodb_realm_besaved/database/mongo_document.dart';
 
 import 'stitch_credential.dart';
 

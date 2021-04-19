@@ -6,7 +6,7 @@ export 'facebook_credential.dart';
 export 'custom_jwt_credential.dart';
 export 'custom_function_credential.dart';
 
-import 'package:flutter_mongodb_realm/database/mongo_document.dart';
+import 'package:flutter_mongodb_realm_besaved/database/mongo_document.dart';
 
 import '../auth.dart';
 import 'anonymous_credential.dart';

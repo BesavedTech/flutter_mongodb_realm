@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:bson/bson.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_mongodb_realm/stream_interop/stream_interop.dart';
-import 'package:flutter_mongo_stitch_platform_interface/flutter_mongo_stitch_platform_interface.dart';
+import 'package:flutter_mongo_stitch_platform_interface_besaved/flutter_mongo_stitch_platform_interface_besaved.dart';
+import 'package:flutter_mongodb_realm_besaved/stream_interop/stream_interop.dart';
 import 'package:meta/meta.dart';
 import 'package:universal_html/html.dart';
 
@@ -57,6 +57,10 @@ class FlutterMongoRealm {
 
   static Future getUserId() async {
     return await FlutterMongoStitchPlatform.instance.getUserId();
+  }
+
+  static Future getUserCustomData() async {
+    return await FlutterMongoStitchPlatform.instance.getUserCustomData();
   }
 
   static Future<bool> registerWithEmail(String email, String password) async {

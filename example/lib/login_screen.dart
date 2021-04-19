@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mongodb_realm/flutter_mongo_realm.dart';
+import 'package:flutter_mongodb_realm/flutter_mongo_realm_besaved.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 
 import 'package:fluttertoast/fluttertoast.dart';
@@ -127,7 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: Colors.red,
                           child: Text("Login with Custom Function",
                               style: TextStyle(color: Colors.white)),
-                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CustomLoginScreen())),
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => CustomLoginScreen())),
                         ),
                       ),
                     ],
@@ -164,9 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _loginAnonymously() async {
-    CoreRealmUser mongoUser =
-        await app.login(Credentials.anonymous());
-
+    CoreRealmUser mongoUser = await app.login(Credentials.anonymous());
 
     if (mongoUser != null) {
       // String userId = mongoUser.id;
@@ -182,38 +183,34 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _loginWithGoogle() async {
-
-   //  GoogleSignIn _googleSignIn = GoogleSignIn(
-   //    scopes: [
-   //      'email',
-   //    ],
-   // //    serverClientId: // "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv.apps.googleusercontent.com",
-   // // "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv.apps.googleusercontent.com"
-   //  );
-   //
-   //  var s = await _googleSignIn.signIn();
-   //  var a = await s.authentication;
+    //  GoogleSignIn _googleSignIn = GoogleSignIn(
+    //    scopes: [
+    //      'email',
+    //    ],
+    // //    serverClientId: // "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv.apps.googleusercontent.com",
+    // // "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv.apps.googleusercontent.com"
+    //  );
+    //
+    //  var s = await _googleSignIn.signIn();
+    //  var a = await s.authentication;
 
     // var idToken = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAzYjJkMjJjMmZlY2Y4NzNlZDE5ZTViOGNmNzA0YWZiN2UyZWQ0YmUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI5NTExNjI5MDg4MjMta2VzYjc1Ymd1ZTNidWpkazhyaTBtZ2VyaGhtdnU1MmMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI5NTExNjI5MDg4MjMtNnQ3a3AxbzFncWs1cWJmbGJvZXQ4Y25rYWRqYjAzdmYuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTU3NjY0MDY0NzgwMDI2Mjc2MzIiLCJlbWFpbCI6ImtmaXIyNTgxMkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IktmaXJvc3MgTWF0aXR5YWh1IiwicGljdHVyZSI6Imh0dHBzOi8vbGg0Lmdvb2dsZXVzZXJjb250ZW50LmNvbS8tMjJYUThDcVlpMVEvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQU1adXVjbWl1UGZ0WkVaMnhQQVh6R2hIRzJJN3BKZzVwUS9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiS2Zpcm9zcyIsImZhbWlseV9uYW1lIjoiTWF0aXR5YWh1IiwibG9jYWxlIjoiZW4iLCJpYXQiOjE2MTIzNTg1MzAsImV4cCI6MTYxMjM2MjEzMH0.nP-qstM_zz4ZaCy9vlIkT0FuIwjGR0mK9GBJvTTTcIkq8EIgAOw4D9o5-_HhhbgxrRpXjIj5pV3G0iGWMTSDz1kEpsS9a1UvTfEG_Gpmr2IDSGZ6e0K-XsBPlviH7KiEXW1NJ_V5ZSNlvl6O4P2F9q0PhPcFlJpjWUxxPvSGXlMC3rFZAM4QkXbG55te1yasebexF04yKcB4_4n35GnoGkYN4jsFUX3sMD9sMVMYBAqoaTtQgIXf8yQyLwoomBNt_hgUtyHx-iW7KCQhy6G9wczdkswdakfbVCQ73yXvw7bQGt2Y57mOgGc7WqjP0Xz8m-M2G0kldmRZDV1KZJL5uA";
 
+    CoreRealmUser mongoUser = await app.login(//WithCredential(
 
-    CoreRealmUser mongoUser =
-        await app.login(//WithCredential(
+        GoogleCredential(
+      serverClientId: "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv",
+      scopes: ["email"],
+    )
 
-            GoogleCredential(
-                serverClientId: "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv",
-                scopes: ["email"],
-            )
-
-
-    //
-    //       Credentials.google(
-    //   serverClientId:
-    //         // "762586994135-sop8bd99tsec7ng40v3r7r8bu6sk487u",
-    //       // "762586994135-b58vl2afhuq76a74ho28c2pm5hi07kbk",
-    //          "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv",
-    //   scopes: ["email"],
-    // ),
+        //
+        //       Credentials.google(
+        //   serverClientId:
+        //         // "762586994135-sop8bd99tsec7ng40v3r7r8bu6sk487u",
+        //       // "762586994135-b58vl2afhuq76a74ho28c2pm5hi07kbk",
+        //          "762586994135-je9l46njk4hf63fb1k2jjmh6ep7nk9bv",
+        //   scopes: ["email"],
+        // ),
         );
 
     if (mongoUser != null) {
@@ -247,7 +244,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
         CoreRealmUser mongoUser =
             await app.login(Credentials.facebook(accessToken));
-
 
         if (mongoUser != null) {
           print("logged in as ${mongoUser.id}");
@@ -286,7 +282,6 @@ class _LoginScreenState extends State<LoginScreen> {
               Credentials.emailPassword(_email, _password)
 //            AnonymousCredential()
               );
-
 
           if (mongoUser != null) {
             // String userId = mongoUser.id;

@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_mongodb_realm/auth/auth.dart';
-import 'package:flutter_mongodb_realm/plugin.dart';
+import 'package:flutter_mongodb_realm_besaved/auth/auth.dart';
+import 'package:flutter_mongodb_realm_besaved/plugin.dart';
 
 class RealmApp {
   RealmApp._();
@@ -28,6 +28,9 @@ class RealmApp {
   Future<bool> logout() => _auth.logout();
 
   Future<String> getUserId() => _auth.getUserId();
+
+  Future<Map<dynamic, dynamic>> getUserCustomData() =>
+      _auth.getUserCustomData();
 
   Future<bool> registerUser(String email, String password) =>
       _auth.registerWithEmail(email: email, password: password);

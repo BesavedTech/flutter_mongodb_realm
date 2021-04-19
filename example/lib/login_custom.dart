@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mongodb_realm/flutter_mongo_realm.dart';
+import 'package:flutter_mongodb_realm/flutter_mongo_realm_besaved.dart';
 
 class CustomLoginScreen extends StatefulWidget {
   @override
@@ -48,8 +48,7 @@ class _CustomLoginScreenState extends State<CustomLoginScreen> {
               width: 200,
               child: RaisedButton(
                 color: Colors.red,
-                child: Text('Login',
-                    style: TextStyle(color: Colors.white)),
+                child: Text('Login', style: TextStyle(color: Colors.white)),
                 onPressed: _submitForm,
               ),
             ),
@@ -69,10 +68,10 @@ class _CustomLoginScreenState extends State<CustomLoginScreen> {
       FocusScope.of(context).requestFocus(FocusNode());
 
       CoreRealmUser mongoUser = await app.login(
-          Credentials.customFunction(MongoDocument.single('username', _username)),
+        Credentials.customFunction(MongoDocument.single('username', _username)),
       );
-      
-      if(mongoUser != null){
+
+      if (mongoUser != null) {
         Navigator.pop(context);
       }
     }
