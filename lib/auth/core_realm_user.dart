@@ -1,5 +1,3 @@
-import 'package:bson/bson.dart';
-
 /// A user that belongs to a MongoDB Stitch application.
 class CoreRealmUser {
   final String? id;
