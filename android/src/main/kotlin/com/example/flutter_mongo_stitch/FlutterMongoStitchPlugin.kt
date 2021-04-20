@@ -554,7 +554,6 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
         val collectionName = call.argument<String>("collection_name")
         val pipelineStrings = call.argument<List<String>>("pipeline")
 
-
         val task = client.aggregate(
                 databaseName,
                 collectionName,
@@ -568,7 +567,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
 
         task!!.iterator().getAsync {
             if (!it.isSuccess)
-                result.error("Error", "Failed to insert a document: ${it.error?.message ?: '?'}", "")
+                result.error("Error", "Failed to aggregate : ${it.error?.message ?: '?'}", "")
 
             aggregationResults.add(it.get().next().toJson())
             result.success(aggregationResults)
@@ -583,6 +582,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
 //
 //        }
     }
+
 
     ///====================================================================
     private fun callFunction(@NonNull call: MethodCall, @NonNull result: Result){

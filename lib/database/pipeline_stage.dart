@@ -5,9 +5,9 @@ class PipelineStage {
     _addExpression("\$addFields", fields);
   }
 
-  // PipelineStage.match(Map<String, dynamic> query) {
-  //   _addExpression("\$match", query);
-  // }
+  PipelineStage.match(Map<String, dynamic> query) {
+    _addExpression("\$match", query);
+  }
 
   PipelineStage.lookup(Map<String, dynamic> query) {
     _addExpression("\$lookup", query);
