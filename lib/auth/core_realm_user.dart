@@ -69,7 +69,7 @@ class UserProfile {
   final String? userId;
   final String? userLevel;
   final String? phoneNumber;
-  final String? dateAdded;
+  final int? dateAdded;
   final String? fbmToken;
 
   UserProfile({
