@@ -25,7 +25,7 @@ class RealmApp {
     return _auth.loginWithCredential(credential);
   }
 
-  Future<bool?> logout() => _auth.logout();
+  Future<bool> logout() => _auth.logout();
 
   Future<String?> getUserId() => _auth.getUserId();
 
