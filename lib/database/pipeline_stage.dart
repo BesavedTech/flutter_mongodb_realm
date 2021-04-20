@@ -9,6 +9,10 @@ class PipelineStage {
     _addExpression("\$match", query);
   }
 
+  PipelineStage.lookup(Map<String, dynamic> query) {
+    _addExpression("\$lookup", query);
+  }
+
   PipelineStage.group(String groupByField,
       {required Map<String, dynamic> accumulators}) {
     var map = <String, dynamic>{
@@ -45,6 +49,8 @@ class PipelineStage {
   void addFields(Map<String, dynamic> fields) {}
 
   void match(Map<String, dynamic> query) {}
+
+  void lookup(Map<String, dynamic> query) {}
 
   void group(String groupByField, Map<String, dynamic> accumulators) {}
 
