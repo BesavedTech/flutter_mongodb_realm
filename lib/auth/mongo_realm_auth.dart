@@ -78,14 +78,13 @@ class MongoRealmAuth {
     return result;
   }
 
-  Future<bool> logout() async {
+  Future<bool?> logout() async {
     var result = await FlutterMongoRealm.logout();
 
-    bool loggedWithGoogle =
-        await (_googleLoginWrapper.isLogged as Future<bool>);
+    bool? loggedWithGoogle = await (_googleLoginWrapper.isLogged);
 //    bool loggedWithFacebook = await _facebookLoginWrapper.isLogged;
 //
-    if (loggedWithGoogle) await _googleLoginWrapper.handleSignOut();
+    if (loggedWithGoogle!) await _googleLoginWrapper.handleSignOut();
 //
 //    if (loggedWithFacebook)
 //      await _facebookLoginWrapper.handleSignOut();
