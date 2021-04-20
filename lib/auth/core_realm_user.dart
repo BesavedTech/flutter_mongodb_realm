@@ -1,3 +1,5 @@
+import 'package:bson/bson.dart';
+
 /// A user that belongs to a MongoDB Stitch application.
 class CoreRealmUser {
   final String? id;
@@ -65,7 +67,7 @@ class StitchUserProfile {
 }
 
 class UserProfile {
-  final String? id;
+  final ObjectId? id;
   final String? userId;
   final String? userLevel;
   final String? phoneNumber;
