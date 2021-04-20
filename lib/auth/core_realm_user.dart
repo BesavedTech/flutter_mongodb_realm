@@ -73,6 +73,7 @@ class UserProfile {
   final String? phoneNumber;
   final int? dateAdded;
   final String? fbmToken;
+  final String? profileId;
 
   UserProfile({
     this.id,
@@ -81,6 +82,7 @@ class UserProfile {
     this.phoneNumber,
     this.dateAdded,
     this.fbmToken,
+    this.profileId,
   });
 
   UserProfile.fromMap(Map map)
@@ -89,5 +91,6 @@ class UserProfile {
         userLevel = map["userLevel"] ?? '',
         phoneNumber = map["phoneNumber"] ?? '',
         dateAdded = map["dateAdded"] ?? '',
+        profileId = map["profileId"] ?? '',
         fbmToken = map["fbmToken"] ?? '';
 }
