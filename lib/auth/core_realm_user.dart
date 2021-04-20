@@ -67,7 +67,7 @@ class StitchUserProfile {
 }
 
 class UserProfile {
-  final ObjectId? id;
+  final String? id;
   final String? userId;
   final String? userLevel;
   final String? phoneNumber;
