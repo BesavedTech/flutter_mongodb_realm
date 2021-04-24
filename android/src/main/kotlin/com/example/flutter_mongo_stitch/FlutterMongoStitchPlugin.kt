@@ -130,7 +130,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
             app = App(AppConfiguration.Builder(clientAppId).build())
         }
         catch (e: Exception){
-            
+            Log.d("MongoRealm", e);
            result.error("ERROR", "Not provided a MongoRealm App ID", "")
         }
 
