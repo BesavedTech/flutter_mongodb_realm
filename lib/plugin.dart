@@ -6,8 +6,9 @@ import 'package:flutter_mongodb_realm_besaved/stream_interop/stream_interop.dart
 import 'auth/core_realm_user.dart';
 
 class FlutterMongoRealm {
-  static Future connectToMongo(String appId) async {
-    return await FlutterMongoStitchPlatform.instance.connectToMongo(appId);
+  static Future connectToMongo(String? appId) async {
+    return await FlutterMongoStitchPlatform.instance
+        .connectToMongo(appId: appId);
   }
 
   static Future signInAnonymously() async {

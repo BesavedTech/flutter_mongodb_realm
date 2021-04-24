@@ -9,7 +9,7 @@ class RealmApp {
 
   factory RealmApp() => _instance;
 
-  static Future init(String appID) async {
+  static Future init(String? appID) async {
     try {
       await FlutterMongoRealm.connectToMongo(appID);
     } on PlatformException catch (_) {

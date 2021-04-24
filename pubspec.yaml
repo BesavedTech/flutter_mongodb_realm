@@ -1,6 +1,6 @@
 name: flutter_mongodb_realm_besaved
 description: Unofficial plugin for using services of the serverless platform MongoDB Realm (previously MongoDB Stitch).
-version: 1.2.7
+version: 1.2.8
 publish_to: 'none'
 homepage: https://github.com/BeSavedTech/flutter_mongo_realm_besaved
 
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_mongo_stitch_platform_interface_besaved: ^1.2.4
+  flutter_mongo_stitch_platform_interface_besaved: ^1.2.6
 
   # The design on https://flutter.dev/go/federated-plugins was to leave
   # this constraint as "any". We cannot do it right now as it fails pub publish
