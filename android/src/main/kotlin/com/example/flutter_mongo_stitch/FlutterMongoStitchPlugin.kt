@@ -131,6 +131,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
         }
         catch (e: Exception){
             Log.d("MongoRealm", e.message);
+           result.error("ERROR", "Not provided a MongoRealm App ID", "")
         }
 
         val user: User? = app.currentUser()
