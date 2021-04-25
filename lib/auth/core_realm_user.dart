@@ -3,7 +3,7 @@ class CoreRealmUser {
   final String? id;
   final String? deviceId;
   final StitchUserProfile? profile;
-  final UserProfile? customData;
+  final Map? customData;
 
   CoreRealmUser({
     required this.id,
@@ -24,7 +24,7 @@ class CoreRealmUser {
         : CoreRealmUser(
             id: map["id"],
             deviceId: map["device_id"],
-            customData: UserProfile.fromMap(map['customData'] ?? Map()),
+            customData: map['customData'] ?? Map(),
             profile: StitchUserProfile.fromMap(map['profile'] ?? Map()));
   }
 }
