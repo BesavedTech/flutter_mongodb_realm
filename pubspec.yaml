@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_mongo_stitch_platform_interface_besaved: ^1.2.6
+  flutter_mongo_stitch_platform_interface_besaved: ^1.2.7
 
   # The design on https://flutter.dev/go/federated-plugins was to leave
   # this constraint as "any". We cannot do it right now as it fails pub publish

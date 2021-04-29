@@ -79,12 +79,12 @@ class FlutterMongoRealm {
   static Future insertDocument({
     required String collectionName,
     required String databaseName,
-    required Map<String, Object?> data,
+    required Map<String, dynamic?> data,
   }) async {
     return await FlutterMongoStitchPlatform.instance.insertDocument(
       collectionName: collectionName,
       databaseName: databaseName,
-      data: data as Map<String, Object>,
+      data: data,
     );
   }
 
