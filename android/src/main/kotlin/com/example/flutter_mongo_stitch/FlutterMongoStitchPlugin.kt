@@ -571,8 +571,8 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
                 result.error("Error", "Failed to aggregate : ${it.error?.message ?: '?'}", "")
 
             // aggregationResults.add(it.get().next().toJson())
-
-            result.success("aggregationResults")
+            
+            result.success(aggregationResults)
         }
 //        task!!.forEach {
 //            aggregationResults.add(it.toJson())
