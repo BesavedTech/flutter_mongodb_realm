@@ -13,6 +13,10 @@ class PipelineStage {
     _addExpression("\$lookup", query);
   }
 
+  PipelineStage.set(Map<String, dynamic> fields) {
+    _addExpression("\$set", fields);
+  }
+
   PipelineStage.group(String groupByField,
       {required Map<String, dynamic> accumulators}) {
     var map = <String, dynamic>{
