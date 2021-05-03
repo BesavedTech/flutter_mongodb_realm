@@ -572,7 +572,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
 
             // aggregationResults.add(it.get().next().toJson())
 
-            result.success("done")
+            result.success("aggregationResults")
         }
 //        task!!.forEach {
 //            aggregationResults.add(it.toJson())
