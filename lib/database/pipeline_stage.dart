@@ -56,6 +56,8 @@ class PipelineStage {
 
   void lookup(Map<String, dynamic> query) {}
 
+  void set(Map<String, dynamic> query) {}
+
   void group(String groupByField, Map<String, dynamic> accumulators) {}
 
   void skip(int num) {}
