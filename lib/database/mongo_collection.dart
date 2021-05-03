@@ -254,22 +254,21 @@ class MongoCollection {
     }
 
     var updateValues = update.values.map((key, value) {
-      if (value is Map<String, dynamic>) {
-        var valueNew = <String, dynamic>{};
-        valueNew.addAll(value);
+      var valueNew = <String, dynamic>{};
+      valueNew.addAll(value);
 
-        valueNew.forEach((key2, value2) {
-          if (value2 is ArrayModifier) {
-            valueNew[key2] = value2.values;
-          } else if (value2 is QueryOperator) {
-            valueNew[key2] = value2.values;
-          }
-        });
-
-        return MapEntry<String, dynamic>(key, valueNew);
-      }
-      return MapEntry<String, dynamic>(key, value);
+      valueNew.forEach((key2, value2) {
+        if (value2 is ArrayModifier) {
+          valueNew[key2] = value2.values;
+        } else if (value2 is QueryOperator) {
+          valueNew[key2] = value2.values;
+        } else {
+          valueNew[key2] = value2;
+        }
+      });
+      return MapEntry<String, dynamic>(key, valueNew);
     });
+
 
     List? results = await (FlutterMongoRealm.updateDocument(
       collectionName: this.collectionName,
