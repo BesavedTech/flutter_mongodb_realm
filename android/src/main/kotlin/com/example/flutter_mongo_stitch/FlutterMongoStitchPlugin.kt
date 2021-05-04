@@ -601,8 +601,9 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
             val funcResult = client.callFunction(functionName!!, args, timeout?.toLong());
             result.success(funcResult?.toJavaValue())
         }
-        catch (e: AppException){
-            result.error("Error", "Failed to call function: ${e.message}", "")
+        catch (e){
+            val err = e;
+            result.error("Error", "Failed to call function: ${err}")
         }
 
 //        val task = client.callFunction(functionName!!, args, timeout?.toLong())
