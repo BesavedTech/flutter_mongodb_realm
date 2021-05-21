@@ -587,7 +587,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
 
 
     ///====================================================================
-    private fun callFunction(@NonNull call: MethodCall, @NonNull result: Result){
+private fun callFunction(@NonNull call: MethodCall, @NonNull result: Result){
         val functionName = call.argument<String>("name")
         val args = call.argument<List<Any>>("args")
         val timeout = call.argument<Int>("timeout")
@@ -601,9 +601,8 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
             val funcResult = client.callFunction(functionName!!, args, timeout?.toLong());
             result.success(funcResult?.toJavaValue())
         }
-        catch (e){
-            val err = e;
-            // result.error("Error", "Failed to call function: ${err}");
+        catch (e: AppException){
+            result.error("Error", "Failed to call function: ${e.message}", "")
         }
 
 //        val task = client.callFunction(functionName!!, args, timeout?.toLong())
