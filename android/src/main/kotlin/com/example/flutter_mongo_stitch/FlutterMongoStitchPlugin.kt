@@ -603,7 +603,7 @@ public class FlutterMongoStitchPlugin: FlutterPlugin, MethodCallHandler {
         }
         catch (e){
             val err = e;
-            result.error("Error", "Failed to call function: ${err}");
+            // result.error("Error", "Failed to call function: ${err}");
         }
 
 //        val task = client.callFunction(functionName!!, args, timeout?.toLong())
